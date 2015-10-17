@@ -2,7 +2,6 @@
 from entry import app
 from flask import request
 from flask import render_template
-from flask import send_from_directory
 import logging
 
 
@@ -24,9 +23,3 @@ def default():
 @app.route("/index.html")
 def index():
     return render_template("index.html")
-
-#@app.route("/<path:path>")
-#def st(path):
-#    print path
-#    send_from_directory('*',"../static" + path)
-
