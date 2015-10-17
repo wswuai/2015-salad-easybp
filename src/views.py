@@ -42,4 +42,6 @@ def login():
     result = db.execute("SELECT * FROM `user` WHERE email = %s AND pwd = %s" %(user,passwd) )
 
     if (len(result)!=0):
-        pass
+        return "OK"
+    else:
+        return "Failed"
