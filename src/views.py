@@ -10,7 +10,7 @@ import service.db as db
 
 logger = logging.getLogger(__name__)
 
-sessions = dict()
+sessions = {}
 
 def make_cache_key(*args, **kwargs):
     path = request.path
@@ -35,7 +35,6 @@ def jsonp(func):
 
 
 @app.route("/")
-#@utils.func_timer.decorator
 def default():
     return render_template("index.html")
 
@@ -47,21 +46,43 @@ def index():
 def login_page():
     return render_template("login.html")
 
+
+import sha
+import time
+
 @app.route("/trylogin")
 @jsonp
 def login():
+    global sessions
     user = request.args.get("user")
     passwd = request.args.get("passwd")
-    session = request.cookies.get("sessionid")
-    if session is not None:
-        render_template("console.html")
+    session = request.cookies.get("sessionId")
+    if session in sessions.keys():
+        #JUMP TO ...
+        #return render_template("index.html")
+        return "Logined :: " + str(session)
 
     sql_stmt =  "SELECT * FROM `user` WHERE email = \"%s\" AND pwd = \"%s\" " %(user,passwd)
     result = db.execute(sql_stmt )
 
-
     if (len(result)!=0):
-        return jsonify({'status':True})
+        new_ssid = str(sha.sha(str(time.time())).hexdigest())
+        print new_ssid
+        ret = jsonify({'status':True})
+        ret.set_cookie("sessionId",new_ssid)
+        sessions[new_ssid] = {}
+        return ret
     else:
         return jsonify({'status':False})
 
+@app.route("/register")
+def register():
+    dic = request.args
+    db.insert_into_table("user",dic)
+    return jsonify("OK")
+
+
+
+@app.route("/sessions")
+def sesslist():
+   return  str(sessions)
