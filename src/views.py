@@ -1,6 +1,6 @@
 # -*- encoding:utf-8 -*-
 from entry import app
-from flask import request,jsonify
+from flask import request,jsonify,abort
 from flask import render_template
 from functools import wraps
 import logging
@@ -81,6 +81,47 @@ def register():
     db.insert_into_table("user",dic)
     return jsonify("OK")
 
+
+import json
+@app.route("/getBookContent")
+def getBookContent():
+    bid = request.args.get("uid")
+
+    book = db.execute("SELECT * FROM user WHERE id = %s" % str(bid) ) [0][13]
+
+    #book = str(book)
+
+    book = json.loads(book)
+
+    return jsonify(book)
+
+
+@app.route("/setBookContent")
+def setBookContent():
+    bid = request.args.get("uid")
+
+    content = request.args.get("content")
+
+    content = json.loads(content)
+
+    category = request.args.get("category")
+
+    if None in [bid,content,category]:
+        abort(400)
+
+    book = db.execute("SELECT * FROM user WHERE id = %s " % str(bid) ) [0][13]
+
+    #book = str(book)
+
+    book = json.loads(book)
+
+    book[category] = content
+
+    update_stmt =  "UPDATE user SET content = '%s' WHERE id=%s " % (json.dumps(book),bid)
+
+    db.execute(update_stmt)
+
+    return "OK"
 
 
 @app.route("/sessions")
