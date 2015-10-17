@@ -39,9 +39,10 @@ def login():
     if session is not None:
         render_template("console.html")
 
-    result = db.execute("SELECT * FROM `user` WHERE email = %s AND pwd = %s" %(user,passwd) )
+    result = db.execute("SELECT * FROM `user` WHERE email = %s AND pwd = %s " %(user,passwd) )
 
     if (len(result)!=0):
         return "OK"
     else:
         return "Failed"
+
