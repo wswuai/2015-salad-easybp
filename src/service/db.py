@@ -1,7 +1,4 @@
 import mysql.connector as connector
-
-
-
 def insert_into_table(tableName,dic):
     conn = connector.connect(user='yms',password='yms',host='120.24.81.151',database='easybp')
 
@@ -57,5 +54,3 @@ def execute(stmt):
     conn.close()
 
     return result
-
-

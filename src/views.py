@@ -70,7 +70,7 @@ def login():
         print new_ssid
         ret = jsonify({'status':True})
         ret.set_cookie("sessionId",new_ssid)
-        sessions[new_ssid] = {}
+        sessions[new_ssid] = {"info":result[0]}
         return ret
     else:
         return jsonify({'status':False})
@@ -79,17 +79,18 @@ def login():
 def register():
     dic = request.args
     db.insert_into_table("user",dic)
-    return jsonify("OK")
+    return "OK"
 
 
 import json
 @app.route("/getBookContent")
 def getBookContent():
-    bid = request.args.get("uid")
+    global sessions
+    sid = request.cookies.get("sessionId")
+
+    bid = sessions[sid]['info'][0]
 
     book = db.execute("SELECT * FROM user WHERE id = %s" % str(bid) ) [0][13]
-
-    #book = str(book)
 
     book = json.loads(book)
 
@@ -98,7 +99,10 @@ def getBookContent():
 
 @app.route("/setBookContent")
 def setBookContent():
-    bid = request.args.get("uid")
+    global sessions
+    sid = request.cookies.get("sessionId")
+
+    bid = sessions[sid]['info'][0]
 
     content = request.args.get("content")
 
@@ -110,8 +114,6 @@ def setBookContent():
         abort(400)
 
     book = db.execute("SELECT * FROM user WHERE id = %s " % str(bid) ) [0][13]
-
-    #book = str(book)
 
     book = json.loads(book)
 
