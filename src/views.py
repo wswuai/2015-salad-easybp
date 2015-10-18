@@ -71,7 +71,7 @@ def login():
         ret = jsonify({'status':True})
         ret.set_cookie("sessionId",new_ssid)
         sessions[new_ssid] = {"info":result[0]}
-        return ret
+        return jsonify({'status':False})
     else:
         return jsonify({'status':False})
 
@@ -97,6 +97,11 @@ def getBookContent():
     return jsonify(book)
 
 
+@app.route("/uploadfile")
+@jsonp
+def uploadfile():
+    pass
+
 @app.route("/setBookContent")
 @jsonp
 def setBookContent():
@@ -105,7 +110,7 @@ def setBookContent():
 
     bid = sessions[sid]['info'][0]
 
-    content = request.args.get("content")
+    content = request.form
 
     content = json.loads(content)
 
