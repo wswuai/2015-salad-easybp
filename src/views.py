@@ -60,10 +60,10 @@ def index_html():
 
     book = db.execute("SELECT * FROM user WHERE id = %s" % str(bid) ) [0][13]
 
-    book = json.loads(book)
 
     if book is None:
-        book = {}
+        book = r"{}"
+    book = json.loads(book)
 
     return render_template("index.html",context=book)
 
