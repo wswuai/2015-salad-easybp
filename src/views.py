@@ -107,7 +107,7 @@ def register():
     new_ssid = str(sha.sha(str(time.time())).hexdigest())
     sessions[new_ssid] = {"info":result[0]}
 
-    ret = redirect("/")
+    ret = redirect("/index.html")
     ret.set_cookie("sessionId",new_ssid)
 
     return ret
