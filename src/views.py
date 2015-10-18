@@ -70,7 +70,7 @@ def login():
         ret = jsonify({'status':True})
         ret.set_cookie("sessionId",new_ssid)
         sessions[new_ssid] = {"info":result[0]}
-        return jsonify({'status':True})
+        return ret
     else:
         return jsonify({'status':False})
 
