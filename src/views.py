@@ -98,6 +98,7 @@ def getBookContent():
 
 
 @app.route("/setBookContent")
+@jsonp
 def setBookContent():
     global sessions
     sid = request.cookies.get("sessionId")
