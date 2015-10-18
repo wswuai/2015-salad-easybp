@@ -51,7 +51,6 @@ import sha
 import time
 
 @app.route("/trylogin")
-@jsonp
 def login():
     global sessions
     user = request.args.get("user")
