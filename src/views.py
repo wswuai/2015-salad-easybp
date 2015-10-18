@@ -46,7 +46,7 @@ def rich():
 
 @app.route("/login.html")
 def login_page():
-    return render_template("login.html")
+    return render_template("Login.html")
 
 @app.route("/Registration.html")
 def Registration():
