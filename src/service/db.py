@@ -21,6 +21,10 @@ def insert_into_table(tableName,dic):
 
     conn.close()
 
+def get_conn():
+    conn = connector.connect(user='yms',password='yms',host='120.24.81.151',database='easybp')
+    return conn
+
 
 def delete_from_table(tableName,statement):
     conn = connector.connect(user='yms',password='yms',host='120.24.81.151',database='easybp')
