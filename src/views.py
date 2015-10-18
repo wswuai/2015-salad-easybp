@@ -114,6 +114,7 @@ def login():
     else:
         return jsonify({'status':False})
 
+
 @app.route("/register")
 def register():
     dic = request.args
