@@ -3,6 +3,7 @@ class Config(object):
     ETL_SERVER_URL = 'http://data.feidee.net/logCollect/collectByPost'
     ETL_SERVER_URL_TAIL = '/logCollect/collectByPost'
     ETL_SERVER_URL_TAIL_BATCH = '/logCollect/batchEventCollect'
+    UPLOAD_FOLDER = 'upload/file/'
     SENDCLOUD_APP_KEY = 'm3lh7hv6-3aab-ifuj-4as7-7dzv58f0q0'
     MQ_SIZE = 200000
     DEBUG = False
