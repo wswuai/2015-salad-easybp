@@ -98,8 +98,7 @@ def login():
     if session in sessions.keys():
         #JUMP TO ...
         #return render_template("index.html")
-        print sessions
-        return "Logined :: " + str(session)
+        return redirect("./index.html")
 
     sql_stmt =  "SELECT * FROM `user` WHERE email = \"%s\" AND pwd = \"%s\" " %(user,passwd)
     result = db.execute(sql_stmt )
