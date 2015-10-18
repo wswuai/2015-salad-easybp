@@ -39,6 +39,11 @@ def jsonp(func):
 def default():
     return render_template("default.html")
 
+@app.route("/richtext.html")
+def rich():
+
+    return render_template("richtext.html")
+
 @app.route("/login.html")
 def login_page():
     return render_template("login.html")
