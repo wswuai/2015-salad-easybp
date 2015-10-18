@@ -650,11 +650,15 @@
         }
         $('#form').submit(function() {
             //alert($(this).serialize());
+
+                        ye = UE.getEditor('editor').getContent();
+                        ee = UE.getEditor('textarea1').getContent();
+                        se = UE.getEditor('textarea2').getContent();
         	$.ajax({  
                    url:"/setBookContent",  
                          method:'POST',
 	                   //dataType:'jsonp',  
-	                   data:$(this).serialize(),  
+	                   data:$(this).serialize() + "&ye=" + ye  + "&ee=" + ee + "&se=" + se ,
 	                   //jsonp:'callback',
 	                   success:function(result) {
 	                   if(result.status==false){
