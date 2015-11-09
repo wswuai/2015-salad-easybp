@@ -1,4 +1,4 @@
-# The Project Of Online ETL Service
+# The Project Of EasyBP
 
 -----
 
@@ -7,12 +7,10 @@
 
 * Department : Big Data
 
-* Issue Data : 2015年 08月 
+* Issue Data : 2015年 10月
 
 
 -----
 
 
 
-* Services:
-    * 随手记Email群发服务log收集服务  (at /etl/ssj/mail)
